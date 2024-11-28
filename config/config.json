@@ -1,0 +1,9 @@
+{
+  "sender_email": "your_email@gmail.com",
+  "sender_password": "your_password",
+  "smtp_server": "smtp.gmail.com",
+  "smtp_port": 587,
+  "receiver_email": "receiver_email@gmail.com",
+   "holding_path": "config/Holdings.xlsx",
+   "watching_path": "config/Watching_list.xlsx"
+}

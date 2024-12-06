@@ -36,10 +36,10 @@ This project is an automated system that sends daily emails summarizing the stoc
 
 - Python 3.x
 
-Install the dependencies via pip:
+Install the dependencies via conda:
 
 ```bash
-pip install requirements.txt
+PS ...\Daliy-Stock-Email-with-quant> conda env create -f environment.yml
 ```
 
 ## Setup
@@ -68,7 +68,7 @@ pip install requirements.txt
 Start by running  `dailyReport.py`
 
 ```bash
-python src/dailyReport.py
+...\Daliy-Stock-Email-with-quant> python src/dailyReport.py
 ```
 
 ## Earning Coefficient
@@ -77,7 +77,7 @@ $$
 EarningCoefficient=ln(e\times \frac{Target\ High\ Price}{Current\ Price})\times ln(e\times \frac{Target\ Low\ Price}{Current\ Price})
 $$
 
-
+![image-20241129000050964](README.assets/image-20241129000050964.png)
 
 ## IMPORTANT LEGAL DISCLAIMER
 

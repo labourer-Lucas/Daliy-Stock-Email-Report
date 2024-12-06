@@ -55,8 +55,9 @@ def write_watching_data(watchings):
         target_high_price = stock.info.get("targetHighPrice", "N/A")
         target_low_price = stock.info.get("targetLowPrice", "N/A")
         target_median_price = stock.info.get("targetMedianPrice", "N/A")
-
-
+        if target_median_price =="N/A":
+            print(f"{symbol} is not valid.")
+            continue
         earning_coefficient = (
             np.log(np.exp(1) * target_high_price / current_price) * np.log(np.exp(1) * target_low_price / current_price)
             if target_high_price != "N/A" and target_low_price != "N/A" and current_price != "N/A"
@@ -75,7 +76,6 @@ def write_watching_data(watchings):
 
     # Create the DataFrame
     watching_data_df = pd.DataFrame(watching_data)
-
     # Calculate the 'Earning' column
     watching_data_df["TargetEarningRate"]= (
         watching_data_df["TargetMedianPrice"] - watching_data_df["CurrentPrice"]
@@ -101,7 +101,9 @@ def write_holding_data(holdings):
         target_high_price = stock.info.get("targetHighPrice", "N/A")
         target_low_price = stock.info.get("targetLowPrice", "N/A")
         target_median_price = stock.info.get("targetMedianPrice", "N/A")
-
+        if target_median_price =="N/A":
+            print(f"{symbol} is not valid.")
+            continue
         earning_coefficient = (
             np.log(np.exp(1) * target_high_price / current_price) * np.log(np.exp(1) * target_low_price / current_price)
             if target_high_price != "N/A" and target_low_price != "N/A" and current_price != "N/A"
@@ -141,6 +143,7 @@ def write_holding_data(holdings):
     return holding_data_df
 
 def send_stock_email():
+    # if True:
     if is_trading_day():
         config = read_config("config/config.json")
         send_email = config.get("sender_email")
@@ -188,7 +191,7 @@ def send_stock_email():
             server.login(send_email, sender_password)
             server.sendmail(send_email, receiver_email, message.as_string())
             server.quit()
-            print("Email sent successfully.")
+            print("Email sent successfully at "+timeStamp+".")
         except Exception as e:
             print(f"Failed to send email: {e}")
     else:
@@ -212,5 +215,5 @@ def schedule_tasks():
         time.sleep(35)
     
 if __name__ == "__main__":
-    # send_stock_email()
+    send_stock_email()
     schedule_tasks()
